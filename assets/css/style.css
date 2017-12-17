@@ -1,0 +1,14 @@
+.jumbotron{
+	text-align: center;
+	font-size: 48px;
+	color: green;
+}
+.panel-header{
+	margin-top: 10px;
+}
+
+img {
+	height: 225px;
+	width: 225px;
+	margin: 8px;
+}
