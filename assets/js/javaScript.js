@@ -1,31 +1,30 @@
-$(document).ready(function(){
-let topics = ["Gob Bluth", "Daria", "Shaq", "Zoidberg", "Chris Farley", "Liz Lemon", "Ron Burgundy", "Monty Burns", "Leslie Knope", "Drake"];
-let displayCount = 10;
-
+let topics = ["Cowboy Bebop", "Trigun", "Cod Geass", "Gundam Wing", "Dragon Ball Z", "Fullmetal Alchemist", "Bleach", "Sword Art Online", "Samurai Champloo", "Death Note", "Hunter x Hunter"];
 
 let displayGif = () => {
 
     $(".giphyArea").empty();
 
-    let content = $(this).attr("data-name");
+    let content = $(this).attr("show");
 
     let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + content + "&limit=10&api_key=qgvPzpbz1gpIcPzM74NX3mkHAhsflylb";
 
-    console.log(response);
+        $.ajax({
 
-    $.ajax({
+         url: queryURL,
 
-        url: queryURL,
-
-        method: "GET"
+         method: "GET"
 
         }).done(function (response) {
 
-            for (let i = 0; i < response.data.length; i++) {
+            console.log(queryURL);
 
-                let stillURL = response.data[i].images.original_still.url;
+            let results = response.data;
 
-                let activeURL = response.data[i].images.original.url;
+            for (let i = 0; i < results.length; i++) {
+
+                let stillURL = results[i].images.original_still.url;
+
+                let activeURL = results[i].images.original.url;
 
                 let gif = $("<img>");
 
@@ -43,30 +42,29 @@ let displayGif = () => {
             }   
 
         });
+ 
+    $('.pic').on('click', () => {
 
-    let activateGif = () => {
+        let src = $(this).attr("src");
 
-        let activeSRC = $(this).attr("data-active");
+            if($(this).hasClass('playing')){
 
-        let newTag = $("<img>");
+            //stop
+            $(this).attr('src', src.replace(/\.gif/i, "_s.gif"))
 
-        $(this).attr("src", activeSRC);
+            $(this).removeClass('playing');
+        }
 
-    }
+        else {
 
-    $(document).on("click", ".pic", activateGif);
+        //play
+        $(this).addClass('playing');
 
-    let stopGif = () => {
+        $(this).attr('src', src.replace(/\_s.gif/i, ".gif"))
 
-        let stillSRC = $(this).attr("data-still");
+      }
 
-        let stopTag = $("<img>");
-
-        $(this).attr("src", stillSRC);
-
-    }
-
-    $(document).on("click", ".pic", stopGif);
+    });
 
 }
 
@@ -74,29 +72,37 @@ let displayGif = () => {
 
         $(".buttonArea").empty();
 
-            for (let i = 0; i < topics.length; i++) {
+        for (let i = 0; i < topics.length; i++) {
 
-            let buttonSubjects = $("<button>");
+            let a = $("<button>");
 
-            buttonSubjects.addClass("animeName");
+            a.addClass("animeName");
 
-            buttonSubjects.attr("data-name", topics[i]);
+            a.attr("show", topics[i]);
 
-            buttonSubjects.text(topics[i]);
+            a.text(topics[i]);
 
-            $(".buttonArea").append(buttonSubjects);
+            $(".buttonArea").append(a);
         }
     }
 
+    //sets up the on click event for the submit button that adds a new button to the topics array
     $(".addBtn").on("click", function (event) {
 
+        //prevents submit from happening
         event.preventDefault();
 
+        //sets the value of whatever the user types into the newAnime variable
         let newAnime = $("#newSubject").val().trim()
 
+        //pushes the user entery into the topics array
         topics.push(newAnime);
 
+        //call the renderButtons function
         renderButtons();
+
+        //clears the input text area after submission
+        $('input[type="text"], textarea').val('');
     });
 
     //Shows GIF of clicked anime
@@ -104,4 +110,3 @@ let displayGif = () => {
 
     //Show original button set
     renderButtons();
-});
