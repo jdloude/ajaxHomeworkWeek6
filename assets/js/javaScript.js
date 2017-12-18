@@ -13,7 +13,7 @@ let displayGif = () => {
     //sets up a variable to hold the queryURL to shortn the requiered typing
     let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchResults + "&limit=10&api_key=qgvPzpbz1gpIcPzM74NX3mkHAhsflylb";
 
-        //call the ajax command to call an API from the server
+        //calls ajax to retreave data from the giphy API from the server
         $.ajax({
 
          url: queryURL,
@@ -41,7 +41,6 @@ let displayGif = () => {
 
                 //gives the varible p the text of the string "Rating: " plus the rating info grabbed from the giphy API
                 let p = $("<p>").text("Rating: " + rating);
-
 
                 //sets up a varible to hold the div element to load in rating info
                 let gifText = $("<div class='ratings'>");
