@@ -1,8 +1,9 @@
 //The intial arry to load in infomation for buttons
-let topics = ["Cowboy Bebop", "Trigun", "Cod Geass", "Gundam Wing", "Dragon Ball Z", "Fullmetal Alchemist", "Bleach", "Sword Art Online", "Samurai Champloo", "Death Note", "Hunter x Hunter"];
+var topics = ["Cowboy Bebop", "Trigun", "Cod Geass", "Gundam Wing", "Dragon Ball Z",
+                "Fullmetal Alchemist", "Bleach", "Sword Art Online", "Samurai Champloo", "Death Note", "Hunter x Hunter"];
 
 //sets up the function displayGif to be call later
-let displayGif = () => {
+function displayGif() {
 
     //empties out the giphyArea to be loaded with info later
     $(".giphyArea").empty();
@@ -13,17 +14,19 @@ let displayGif = () => {
     //sets up a variable to hold the queryURL to shortn the requiered typing
     let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchResults + "&limit=10&api_key=qgvPzpbz1gpIcPzM74NX3mkHAhsflylb";
 
-        //calls ajax to retreave data from the giphy API from the server
-        $.ajax({
+    //calls ajax to retreave data from the giphy API from the server
+    $.ajax({
 
-         url: queryURL,
+        url: queryURL,
 
-         method: "GET"
+        method: "GET"
 
         // when done loading the inforamtion call this function
         }).done(function (response) {
 
             console.log(queryURL);
+
+            renderButtons();
             //sets up a variable to hold the response.data to shortn the requiered typing
             let results = response.data;
 
@@ -51,14 +54,7 @@ let displayGif = () => {
                 //adds a class to the gif that can be called later
                 gif.addClass("pic");
 
-                //gives the gif the atrribute of data-active with the value of the activeURL
-                gif.attr("data-active", activeURL);
-
-                //gives the gif the atrribute of data-still with the value of the stillURL
-                gif.attr("data-still", stillURL);
-
-                //gives the gif the atrribute of the source with the value of the stillURL to be shown on load
-                gif.attr("src", stillURL);
+                gif.attr("src", results[i].images.fixed_height_still.url);
 
                 //gives the imagie a alt tag of gif for web page readers
                 gif.attr("alt", "GIF");
@@ -72,6 +68,7 @@ let displayGif = () => {
             }   
 
         });
+}
 
     //sets a on click function the the pic class given above
     $(document).on('click', '.pic', function() {
@@ -100,10 +97,9 @@ let displayGif = () => {
       }
 
     });
-
-}
+   
     //sets up the renderButton function to display all buttons
-    let renderButtons = () => {
+    function renderButtons() {
 
         //empties out the buttonArea to be loaded in with data
         $(".buttonArea").empty();
