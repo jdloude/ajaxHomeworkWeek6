@@ -36,11 +36,15 @@ let displayGif = () => {
                 //sets up a activeURL variable to hold the active gif url
                 let activeURL = results[i].images.original.url;
 
+                //grabs the rating info from the giphy API and stores it in rating
                 let rating = results[i].rating;
 
+                //gives the varible p the text of the string "Rating: " plus the rating info grabbed from the giphy API
                 let p = $("<p>").text("Rating: " + rating);
 
-                let gifText = $("<div class='item'>");
+
+                //sets up a varible to hold the div element to load in rating info
+                let gifText = $("<div class='ratings'>");
 
                 //sets up the gif as an image html 
                 let gif = $("<img>");
@@ -60,9 +64,10 @@ let displayGif = () => {
                 //gives the imagie a alt tag of gif for web page readers
                 gif.attr("alt", "GIF");
 
+                //grabs the p variable and puts it in the gifText variable
                 gifText.prepend(p)
 
-                //applys all the gif data to the giphyArea
+                //applys all the gif and gifText data to the giphyArea
                 $(".giphyArea").append(gif, gifText);
 
             }   
