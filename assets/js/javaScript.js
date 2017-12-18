@@ -54,6 +54,7 @@ function displayGif() {
                 //adds a class to the gif that can be called later
                 gif.addClass("pic");
 
+                //sets the still url for the gif to a fixed height
                 gif.attr("src", results[i].images.fixed_height_still.url);
 
                 //gives the imagie a alt tag of gif for web page readers
