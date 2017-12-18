@@ -4,9 +4,9 @@ let displayGif = () => {
 
     $(".giphyArea").empty();
 
-    let content = $(this).attr("show");
+    let searchResults = $(this).attr("data-show");
 
-    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + content + "&limit=10&api_key=qgvPzpbz1gpIcPzM74NX3mkHAhsflylb";
+    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchResults + "&limit=10&api_key=qgvPzpbz1gpIcPzM74NX3mkHAhsflylb";
 
         $.ajax({
 
@@ -43,7 +43,7 @@ let displayGif = () => {
 
         });
  
-    $('.pic').on('click', () => {
+    $(document).on('click', '.pic', function() {
 
         let src = $(this).attr("src");
 
@@ -74,15 +74,15 @@ let displayGif = () => {
 
         for (let i = 0; i < topics.length; i++) {
 
-            let a = $("<button>");
+            let animeButton = $("<button>");
 
-            a.addClass("animeName");
+            animeButton.addClass("animeName");
 
-            a.attr("show", topics[i]);
+            animeButton.attr("data-show", topics[i]);
 
-            a.text(topics[i]);
+            animeButton.text(topics[i]);
 
-            $(".buttonArea").append(a);
+            $(".buttonArea").append(animeButton);
         }
     }
 
