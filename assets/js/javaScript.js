@@ -1,5 +1,5 @@
 //The intial arry to load in infomation for buttons
-var topics = ["Cowboy Bebop", "Trigun", "Cod Geass", "Gundam Wing", "Dragon Ball Z",
+var topics = ["Cowboy Bebop", "Trigun", "Code Geass", "Gundam Wing", "Dragon Ball Z",
                 "Fullmetal Alchemist", "Bleach", "Sword Art Online", "Samurai Champloo", "Death Note", "Hunter x Hunter"];
 
 //sets up the function displayGif to be call later
